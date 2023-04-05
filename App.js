@@ -1,12 +1,16 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from 'react-native';
+import CardOne from './CardOne';
+import Header from './Header';
+import CardTwo from './CardTwo';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <Text>trying to push</Text>
       <StatusBar style="auto" />
+      <Header></Header>
+      <CardOne></CardOne>
+      <CardTwo></CardTwo>
     </View>
   );
 }
