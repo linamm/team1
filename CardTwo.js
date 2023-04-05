@@ -1,10 +1,12 @@
 
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet, Dimensions} from 'react-native';
+
+const screenWidth = Dimensions.get('window').width;
 
 const CardTwo= ({ data }) => {
     return (
-      <View>
+      <View style={styles.card}>
         <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Card Two </Text>
         <Text style={{ fontSize: 14 }}> Card Two </Text>
       </View>
@@ -12,3 +14,14 @@ const CardTwo= ({ data }) => {
   };
   
   export default CardTwo;
+
+  const styles = StyleSheet.create({
+    card: {
+        width: screenWidth * 0.9,
+        height: 300,
+        borderRadius: 10, 
+        backgroundColor: "red",
+        padding: 10,
+        margin: 10
+    },
+  });

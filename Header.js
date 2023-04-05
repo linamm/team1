@@ -1,6 +1,8 @@
 
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, Dimensions } from 'react-native';
+
+const screenWidth = Dimensions.get('window').width;
 
 const Header = ({ title, subtitle }) => {
     return (
@@ -15,7 +17,7 @@ const Header = ({ title, subtitle }) => {
   
   const styles = StyleSheet.create({
     image: {
-      width: 300,
+      width: screenWidth,
       height: 200,
     },
   });
