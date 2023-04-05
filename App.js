@@ -1,17 +1,9 @@
-<<<<<<< Updated upstream
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import CardOne from "./CardOne";
-import Header from "./Header";
-import CardTwo from "./CardTwo";
-import BatteryStatus from "./BatteryStatus";
-=======
 
+import BatteryStatus from "./BatteryStatus";
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import CardOne from './CardOne';
 import Header from './Header';
 import CardTwo from './CardTwo';
->>>>>>> Stashed changes
 import { useState } from "react";
 
 
@@ -42,12 +34,8 @@ export default function App() {
       <Header></Header>
       <CardOne carbonIntensityData={carbonIntensityData}></CardOne>
       <CardTwo></CardTwo>
-<<<<<<< Updated upstream
       <BatteryStatus />
-    </View>
-=======
     </ImageBackground>
->>>>>>> Stashed changes
   );
 }
 
