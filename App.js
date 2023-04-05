@@ -1,8 +1,8 @@
 import BatteryStatus from "./BatteryStatus";
-import { StyleSheet, Text, View, ImageBackground } from "react-native";
-import CardOne from "./CardOne";
-import Header from "./Header";
-import CardTwo from "./CardTwo";
+import { StyleSheet, ImageBackground, ScrollView } from 'react-native';
+import CardOne from './CardOne';
+import Header from './Header';
+import CardTwo from './CardTwo';
 import { useState } from "react";
 
 export default function App() {
@@ -29,6 +29,7 @@ export default function App() {
     });
 
   return (
+    <ScrollView>
     <ImageBackground
       source={require("./vodafone.jpeg")}
       style={styles.backgroundImage}
@@ -39,6 +40,7 @@ export default function App() {
       <CardTwo></CardTwo>
       <BatteryStatus />
     </ImageBackground>
+    </ScrollView>
   );
 }
 
