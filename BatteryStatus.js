@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Text } from "react-native";
-import { addBatteryStateListener } from "expo-battery";
+import {
+  addBatteryLevelListener,
+  addBatteryStateListener,
+  getBatteryLevelAsync,
+} from "expo-battery";
 
 const BATTERY_STATE = {
   1: "UNPLUGGED",
@@ -11,18 +15,28 @@ const BATTERY_STATE = {
 
 const BatteryLevel = () => {
   const [batteryState, setBatteryState] = useState(null);
+  const [batteryLevel, setBatteryLevel] = useState(0);
 
   useEffect(() => {
-    const batteryStateListener = addBatteryStateListener(({ batteryState }) => {
-      setBatteryState(batteryState);
-    });
+    (async () => {
+      setBatteryLevel(await getBatteryLevelAsync());
+    })();
 
+    const batteryStateListener = addBatteryStateListener((bt) => {
+      console.log(bt, batteryLevel);
+      setBatteryState(bt.batteryState);
+    });
     return () => {
       batteryStateListener.remove();
     };
-  }, []);
+  }, [batteryState]);
 
-  return <Text>Battery State: {BATTERY_STATE[batteryState]}</Text>;
+  return (
+    <>
+      <Text>Battery State: {BATTERY_STATE[batteryState]}</Text>
+      <Text>{`${Math.floor(batteryLevel * 100)}%`}</Text>
+    </>
+  );
 };
 
 export default BatteryLevel;

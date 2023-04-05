@@ -1,37 +1,44 @@
-
 import BatteryStatus from "./BatteryStatus";
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
-import CardOne from './CardOne';
-import Header from './Header';
-import CardTwo from './CardTwo';
+import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import CardOne from "./CardOne";
+import Header from "./Header";
+import CardTwo from "./CardTwo";
 import { useState } from "react";
 
-
 export default function App() {
+  const [carbonIntensityData, setCarbonIntensityData] = useState([]);
 
-  const [ carbonIntensityData, setCarbonIntensityData ] = useState([])
-
-
-  const dateString = new Date()
+  const dateString = new Date();
 
   const startDate = dateString.toISOString().slice(0, -5) + "Z";
+<<<<<<< HEAD
   dateString.setDate(dateString.getDate() + 5)
+=======
+  dateString.setDate(dateString.getDate() + 1);
+>>>>>>> 30ecdc54bc06b1869907ad8dc477304029231dd3
   const endDate = dateString.toISOString().slice(0, -5) + "Z";
-  const postcode = 'E9'
+  const postcode = "E9";
 
-  fetch(`https://api.carbonintensity.org.uk/regional/intensity/${startDate}/${endDate}/postcode/${postcode}`, {
-    headers: {
-      'Accept': 'application/json'
+  fetch(
+    `https://api.carbonintensity.org.uk/regional/intensity/${startDate}/${endDate}/postcode/${postcode}`,
+    {
+      headers: {
+        Accept: "application/json",
+      },
     }
-  })
-  .then(res => res.json())
-  .then(res => {
-    setCarbonIntensityData(res.data.data)
-  })
+  )
+    .then((res) => res.json())
+    .then((res) => {
+      setCarbonIntensityData(res.data.data);
+    });
 
   return (
-  <ImageBackground source={require('./vodafone.jpeg')} style={styles.backgroundImage}>
+    <ImageBackground
+      source={require("./vodafone.jpeg")}
+      style={styles.backgroundImage}
+    >
       <Header></Header>
+      <BatteryStatus />
       <CardOne carbonIntensityData={carbonIntensityData}></CardOne>
       <CardTwo></CardTwo>
       <BatteryStatus />
@@ -48,6 +55,6 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     flex: 1,
-    resizeMode: 'cover', // or 'stretch'
+    resizeMode: "cover", // or 'stretch'
   },
 });
