@@ -104,7 +104,7 @@ const CardOne = ({ carbonIntensityData }) => {
   const styles = StyleSheet.create({
     card: {
         width: screenWidth * 0.9,
-        height: 300,
+        height: 400,
         borderRadius: 10, 
         backgroundColor: "#ffffffaa",
         padding: 10,
