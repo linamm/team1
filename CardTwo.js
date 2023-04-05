@@ -33,7 +33,7 @@ const CardTwo = ({ carbonIntensityData }) => {
       </Text>
       <Text style={{ fontSize: 12, textAlign: "center", paddingBottom: 10 }}>
         {" "}
-        util{" "}
+        until{" "}
       </Text>
       <Text
         style={{
