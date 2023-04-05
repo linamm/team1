@@ -1,8 +1,9 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from 'react-native';
-import CardOne from './CardOne';
-import Header from './Header';
-import CardTwo from './CardTwo';
+import { StyleSheet, Text, View } from "react-native";
+import CardOne from "./CardOne";
+import Header from "./Header";
+import CardTwo from "./CardTwo";
+import BatteryStatus from "./BatteryStatus";
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
       <Header></Header>
       <CardOne></CardOne>
       <CardTwo></CardTwo>
+      <BatteryStatus />
     </View>
   );
 }
