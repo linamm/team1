@@ -6,7 +6,7 @@ import BatteryLevel from "./BatteryStatus";
 
 const screenWidth = Dimensions.get("window").width;
 
-const CardTwo = ({ data }) => {
+const CardTwo = ({ carbonIntensityData }) => {
   return (
     <View style={styles.card}>
       <View
@@ -55,7 +55,7 @@ const CardTwo = ({ data }) => {
         }}
       >
         {" "}
-        <BatteryLevel carbonIntensityData={data} />
+        <BatteryLevel carbonIntensityData={carbonIntensityData} />
       </Text>
 
       <View style={{ flexDirection: "row", textAlign: "center" }}>
@@ -81,6 +81,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
 });

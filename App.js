@@ -42,7 +42,7 @@ export default function App() {
         >
           <Header></Header>
           <CardOne carbonIntensityData={carbonIntensityData}></CardOne>
-          <CardTwo></CardTwo>
+          <CardTwo carbonIntensityData={carbonIntensityData}></CardTwo>
         </ImageBackground>
       </ScrollView>
     </SafeAreaView>
