@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions} from 'react-native';
+import { View, Text, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import {
   LineChart,
   BarChart,
@@ -30,32 +30,37 @@ const CardOne = ({ carbonIntensityData }) => {
     <View style={styles.card} >
       <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Card One </Text>
       <Text style={{ fontSize: 14 }}> Card One Description </Text>
-      <BarChart 
-        data={{
-          labels: labels,
-          datasets: [
-            {
-              data: dataset
+      <ScrollView horizontal>
+        <BarChart 
+          data={{
+            labels: labels.slice(0, 3),
+            datasets: [
+              {
+                data: dataset.slice(0, 3)
+              }
+            ]
+          }}
+          width={screenWidth * 2} // from react-native
+          height={220}
+          yAxisInterval={1}
+          chartConfig={{
+            backgroundColor: "#e26a00",
+            backgroundGradientFrom: "#fb8c00",
+            backgroundGradientTo: "#ffa726",
+            decimalPlaces: 2, // optional, defaults to 2dp
+            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            style: {
+              borderRadius: 16
+            },
+            propsForDots: {
+              r: "6",
+              strokeWidth: "2",
+              stroke: "#ffa726"
             }
-          ]
-        }}
-        chartConfig={{
-          backgroundColor: "#e26a00",
-          backgroundGradientFrom: "#fb8c00",
-          backgroundGradientTo: "#ffa726",
-          decimalPlaces: 2, // optional, defaults to 2dp
-          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-          style: {
-            borderRadius: 16
-          },
-          propsForDots: {
-            r: "6",
-            strokeWidth: "2",
-            stroke: "#ffa726"
-          }
-        }}
-      />
+          }}
+        />
+      </ScrollView>
     </View>
   );
   };
