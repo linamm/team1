@@ -1,9 +1,8 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import BatteryStatus from "./BatteryStatus";
+import { StyleSheet, Text, View, ImageBackground } from "react-native";
 import CardOne from "./CardOne";
 import Header from "./Header";
 import CardTwo from "./CardTwo";
-import BatteryStatus from "./BatteryStatus";
 import { useState } from "react";
 
 export default function App() {
@@ -12,7 +11,7 @@ export default function App() {
   const dateString = new Date();
 
   const startDate = dateString.toISOString().slice(0, -5) + "Z";
-  dateString.setDate(dateString.getDate() + 5);
+  dateString.setDate(dateString.getDate() + 1);
   const endDate = dateString.toISOString().slice(0, -5) + "Z";
   const postcode = "E9";
 
@@ -30,12 +29,16 @@ export default function App() {
     });
 
   return (
-    <View style={styles.container}>
+    <ImageBackground
+      source={require("./vodafone.jpeg")}
+      style={styles.backgroundImage}
+    >
       <Header></Header>
       <BatteryStatus />
       <CardOne carbonIntensityData={carbonIntensityData}></CardOne>
       <CardTwo></CardTwo>
-    </View>
+      <BatteryStatus />
+    </ImageBackground>
   );
 }
 
@@ -45,5 +48,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "flex-start",
     justifyContent: "flex-start",
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: "cover", // or 'stretch'
   },
 });
