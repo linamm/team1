@@ -6,11 +6,9 @@ const screenWidth = Dimensions.get('window').width;
 
 const Header = ({ title, subtitle }) => {
     return (
-      <View>
+      <View style={{backgroundColor: "#BD0000", paddingTop: 16}}>
         <Image source={require('./header.png')}         style={styles.image}
-        resizeMode="cover"/>
-
-
+        />
       </View>
     );
   };
@@ -18,7 +16,8 @@ const Header = ({ title, subtitle }) => {
   const styles = StyleSheet.create({
     image: {
       width: screenWidth,
-      height: 200,
+      height: 290,
+      resizeMode: 'stretch',
     },
   });
 

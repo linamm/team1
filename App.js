@@ -1,5 +1,10 @@
 import BatteryStatus from "./BatteryStatus";
-import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import {
+  StyleSheet,
+  ImageBackground,
+  ScrollView,
+  SafeAreaView,
+} from "react-native";
 import CardOne from "./CardOne";
 import Header from "./Header";
 import CardTwo from "./CardTwo";
@@ -11,7 +16,7 @@ export default function App() {
   const dateString = new Date();
 
   const startDate = dateString.toISOString().slice(0, -5) + "Z";
-  dateString.setDate(dateString.getDate() + 5)
+  dateString.setDate(dateString.getDate() + 5);
   const endDate = dateString.toISOString().slice(0, -5) + "Z";
   const postcode = "E9";
 
@@ -33,16 +38,18 @@ export default function App() {
   
 
   return (
-    <ImageBackground
-      source={require("./vodafone.jpeg")}
-      style={styles.backgroundImage}
-    >
-      <Header></Header>
-      <BatteryStatus />
-      <CardOne carbonIntensityData={carbonIntensityData}></CardOne>
-      <CardTwo></CardTwo>
-      <BatteryStatus />
-    </ImageBackground>
+    <SafeAreaView>
+      <ScrollView>
+        <ImageBackground
+          source={require("./vodafone.jpeg")}
+          style={styles.backgroundImage}
+        >
+          <Header></Header>
+          <CardOne carbonIntensityData={carbonIntensityData}></CardOne>
+          <CardTwo carbonIntensityData={carbonIntensityData}></CardTwo>
+        </ImageBackground>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
