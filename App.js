@@ -11,11 +11,7 @@ export default function App() {
   const dateString = new Date();
 
   const startDate = dateString.toISOString().slice(0, -5) + "Z";
-<<<<<<< HEAD
   dateString.setDate(dateString.getDate() + 5)
-=======
-  dateString.setDate(dateString.getDate() + 1);
->>>>>>> 30ecdc54bc06b1869907ad8dc477304029231dd3
   const endDate = dateString.toISOString().slice(0, -5) + "Z";
   const postcode = "E9";
 
