@@ -15,10 +15,25 @@
     "react": "18.2.0",
     "react-native": "0.71.6",
     "react-native-chart-kit": "^6.12.0",
-    "react-native-svg": "13.4.0"
+    "react-native-push-notification": "^8.1.1",
+    "react-native-svg": "13.4.0",
+    "expo-notifications": "~0.18.1",
+    "expo-device": "~5.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
   },
-  "private": true
+  "private": true,
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/linamm/team1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/linamm/team1/issues"
+  },
+  "homepage": "https://github.com/linamm/team1#readme"
 }
