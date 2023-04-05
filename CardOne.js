@@ -23,32 +23,43 @@ const CardOne = ({ carbonIntensityData }) => {
     )
   }
 
-  const labels = carbonIntensityData.map(data => data.to);
+  const labels = carbonIntensityData.map((data, index) => {
+    const now = new Date(data.to);
+    const month = ('0' + (now.getMonth() + 1)).slice(-2);
+    const day = ('0' + now.getDate()).slice(-2);
+    const hour = ('0' + now.getHours()).slice(-2);
+    const minutes = ('0' + now.getMinutes()).slice(-2);
+    const formattedTime = `${hour}:${minutes}`;
+    if (index === 0 || formattedTime === "00:00") return `${day}/${month} ${hour}:${minutes}`
+    return formattedTime
+  });
   const dataset = carbonIntensityData.map(data => data.intensity.forecast)
 
   return (
     <View style={styles.card} >
-      <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Card One </Text>
-      <Text style={{ fontSize: 14 }}> Card One Description </Text>
+      <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Carbon Intensity Data </Text>
+      <Text style={{ fontSize: 14 }}> Your 2 day forecast for carbon intensity </Text>
       <ScrollView horizontal>
         <BarChart 
           data={{
-            labels: labels.slice(0, 3),
+            labels: labels,
             datasets: [
               {
-                data: dataset.slice(0, 3)
+                data: dataset
               }
             ]
           }}
-          width={screenWidth * 2} // from react-native
-          height={220}
-          yAxisInterval={1}
+          width={screenWidth * 18} // from react-native
+          height={240}
           chartConfig={{
-            backgroundColor: "#e26a00",
-            backgroundGradientFrom: "#fb8c00",
-            backgroundGradientTo: "#ffa726",
+            backgroundColor: "#BD0000",
+            backgroundGradientFrom: "#BD0000",
+            backgroundGradientTo: "#BD0000",
             decimalPlaces: 2, // optional, defaults to 2dp
-            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+            color: (opacity = 1, index) => {
+              if (index === 1) return `rgba(0,0,0,1)`
+              return `rgba(255, 255, 255, ${opacity})`
+            },
             labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
             style: {
               borderRadius: 16
