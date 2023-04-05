@@ -8,7 +8,7 @@ import {
 import CardOne from "./CardOne";
 import Header from "./Header";
 import CardTwo from "./CardTwo";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function App() {
   const [carbonIntensityData, setCarbonIntensityData] = useState([]);
@@ -20,18 +20,22 @@ export default function App() {
   const endDate = dateString.toISOString().slice(0, -5) + "Z";
   const postcode = "E9";
 
-  fetch(
-    `https://api.carbonintensity.org.uk/regional/intensity/${startDate}/${endDate}/postcode/${postcode}`,
-    {
-      headers: {
-        Accept: "application/json",
-      },
-    }
-  )
-    .then((res) => res.json())
-    .then((res) => {
-      setCarbonIntensityData(res.data.data);
-    });
+  useEffect(() => {
+    fetch(
+      `https://api.carbonintensity.org.uk/regional/intensity/${startDate}/${endDate}/postcode/${postcode}`,
+      {
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        setCarbonIntensityData(res.data.data);
+      });
+  }, []);
+
+  
 
   return (
     <SafeAreaView>
