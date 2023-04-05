@@ -1,14 +1,8 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions, ScrollView } from 'react-native';
-import {
-  LineChart,
-  BarChart,
-  PieChart,
-  ProgressChart,
-  ContributionGraph,
-  StackedBarChart
-} from "react-native-chart-kit";
+import { BarChart } from "react-native-chart-kit";
+import { AntDesign } from '@expo/vector-icons'; 
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -34,11 +28,26 @@ const CardOne = ({ carbonIntensityData }) => {
     return formattedTime
   });
   const dataset = carbonIntensityData.map(data => data.intensity.forecast)
+  const carbonIntensityHighAndLow = carbonIntensityData.filter(data => (new Date(data.to)).getDay() === (new Date()).getDay()).reduce((range, data) => {
+    let toTime = new Date(data.to);
+    let hour = ('0' + toTime.getHours()).slice(-2);
+    let minutes = ('0' + toTime.getMinutes()).slice(-2);
+    toTime = `${hour}:${minutes}`
+
+    let fromTime = new Date(data.from);
+    hour = ('0' + fromTime.getHours()).slice(-2);
+    minutes = ('0' + fromTime.getMinutes()).slice(-2);
+    fromTime = `${hour}:${minutes}`
+    
+    if (range[0].toTime === undefined || range[0].value < data.intensity.forecast) range[0] = { toTime, fromTime, value: data.intensity.forecast };
+    if (range[1].toTime === undefined || range[1].value > data.intensity.forecast) range[1] = { toTime, fromTime, value: data.intensity.forecast };
+    return range;
+  }, [{},{}])
 
   return (
     <View style={styles.card} >
       <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Carbon Intensity Data </Text>
-      <Text style={{ fontSize: 14 }}> Your 2 day forecast for carbon intensity </Text>
+      <Text style={{ fontSize: 14 }}> Your 2 day forecast for carbon intensity</Text>
       <ScrollView horizontal>
         <BarChart 
           data={{
@@ -72,6 +81,11 @@ const CardOne = ({ carbonIntensityData }) => {
           }}
         />
       </ScrollView>
+      
+      <Text style={{ fontSize: 14 }}>Today's High and Low Carbon Intensity</Text>
+      <Text style={{ fontSize: 14, fontWeight: 'bold', color: 'green' }}><AntDesign name="arrowdown" size={14} color="green" />{carbonIntensityHighAndLow[1].value} {carbonIntensityHighAndLow[1].fromTime}-{carbonIntensityHighAndLow[1].toTime}</Text>
+      <Text style={{ fontSize: 14, fontWeight: 'bold', color: 'red' }}><AntDesign name="arrowup" size={14} color="red" />{carbonIntensityHighAndLow[0].value} {carbonIntensityHighAndLow[0].fromTime}-{carbonIntensityHighAndLow[0].toTime}</Text>
+
     </View>
   );
   };
