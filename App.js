@@ -5,6 +5,7 @@ import Header from './Header';
 import CardTwo from './CardTwo';
 import { useState } from "react";
 
+
 export default function App() {
 
   const [ carbonIntensityData, setCarbonIntensityData ] = useState([])
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
   },
 });
