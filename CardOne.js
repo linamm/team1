@@ -85,6 +85,7 @@ const CardOne = ({ carbonIntensityData }) => {
       <Text style={{ fontSize: 14 }}>Today's High and Low Carbon Intensity</Text>
       <Text style={{ fontSize: 14, fontWeight: 'bold', color: 'green' }}><AntDesign name="arrowdown" size={14} color="green" />{carbonIntensityHighAndLow[1].value} {carbonIntensityHighAndLow[1].fromTime}-{carbonIntensityHighAndLow[1].toTime}</Text>
       <Text style={{ fontSize: 14, fontWeight: 'bold', color: 'red' }}><AntDesign name="arrowup" size={14} color="red" />{carbonIntensityHighAndLow[0].value} {carbonIntensityHighAndLow[0].fromTime}-{carbonIntensityHighAndLow[0].toTime}</Text>
+      <Text style={{ fontSize: 12 }}>Use this as a guide to decide when to use power in your region to minimise your environmental impact</Text>
 
     </View>
   );
