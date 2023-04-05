@@ -9,6 +9,8 @@ import {
   ContributionGraph,
   StackedBarChart
 } from "react-native-chart-kit";
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -37,7 +39,13 @@ const CardOne = ({ carbonIntensityData }) => {
 
   return (
     <View style={styles.card} >
-      <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Carbon Intensity Data </Text>
+    <View style={{
+          flexDirection: "row",
+          alignItems: "flex-start",
+          alignSelf: "flex-start",
+          paddingBottom: 20,
+        }}><MaterialCommunityIcons name="clock-check-outline" size={24} color="black" />
+      <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Carbon Intensity Data </Text></View>
       <Text style={{ fontSize: 14 }}> Your 2 day forecast for carbon intensity </Text>
       <ScrollView horizontal>
         <BarChart 
