@@ -1,14 +1,28 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions} from 'react-native';
+import { Feather } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons'; 
 
 const screenWidth = Dimensions.get('window').width;
 
 const CardTwo= ({ data }) => {
     return (
       <View style={styles.card}>
-        <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Card Two </Text>
-        <Text style={{ fontSize: 14 }}> Card Two </Text>
+        <View style={{flexDirection: "row"}}>
+        <Feather name="battery-charging" size={24} color="black" /> 
+            <Text style={styles.title}> Your next green charge window</Text>
+        </View>
+        <Text style={{ fontSize: 20, fontWeight: 'bold', textAlign: 'center', paddingBottom: 10}}> Charge now</Text>
+        <Text style={{ fontSize: 12, textAlign: 'center', paddingBottom: 10 }}> util </Text>
+        <Text style={{ fontSize: 18, fontWeight: 'bold', textAlign: 'center', paddingBottom: 10  }}> 19:00 </Text>
+        <Text style={{ fontSize: 12, textAlign: 'center', color: 'green', paddingBottom: 10  }}> You currently in the green chargin window for your region</Text>
+
+        <View style={{flexDirection: "row", textAlign: 'center'} }>
+        <Entypo name="location-pin" size={24} color="black" />
+
+            <Text style={{fontSize: 12}}> Borough London</Text>
+        </View>
       </View>
     );
   };
@@ -17,11 +31,15 @@ const CardTwo= ({ data }) => {
 
   const styles = StyleSheet.create({
     card: {
+        title: {
+            fontSize: 18,
+            fontWeight: 'bold'
+        },
         width: screenWidth * 0.9,
-        height: 300,
         borderRadius: 10, 
         backgroundColor: "#ffffffaa",
         padding: 10,
-        margin: screenWidth * 0.05
+        margin: screenWidth * 0.05,
+        alignItems: 'center'
     },
   });
