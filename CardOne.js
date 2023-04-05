@@ -1,25 +1,74 @@
 
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet, Dimensions} from 'react-native';
+import {
+  LineChart,
+  BarChart,
+  PieChart,
+  ProgressChart,
+  ContributionGraph,
+  StackedBarChart
+} from "react-native-chart-kit";
+
+const screenWidth = Dimensions.get('window').width;
 
 const CardOne = ({ carbonIntensityData }) => {
 
   
-  if (carbonIntensityData.length === 0) {
+  if (!carbonIntensityData || carbonIntensityData.length === 0) {
     return (
-      <View>
-        Loading Carbon Intensity Data...
+      <View style={styles.card}>
+        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Loading Carbon Intensity Data...</Text>
       </View>
     )
   }
 
+  const labels = carbonIntensityData.map(data => data.to);
+  const dataset = carbonIntensityData.map(data => data.intensity.forecast)
+
   return (
-    <View>
+    <View style={styles.card} >
       <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Card One </Text>
       <Text style={{ fontSize: 14 }}> Card One Description </Text>
-      <Text style={{ fontSize: 14 }}>intensity for the next half hour: {carbonIntensityData[0].intensity.index}</Text>
+      <BarChart 
+        data={{
+          labels: labels,
+          datasets: [
+            {
+              data: dataset
+            }
+          ]
+        }}
+        chartConfig={{
+          backgroundColor: "#e26a00",
+          backgroundGradientFrom: "#fb8c00",
+          backgroundGradientTo: "#ffa726",
+          decimalPlaces: 2, // optional, defaults to 2dp
+          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          style: {
+            borderRadius: 16
+          },
+          propsForDots: {
+            r: "6",
+            strokeWidth: "2",
+            stroke: "#ffa726"
+          }
+        }}
+      />
     </View>
   );
   };
   
   export default CardOne;
+
+  const styles = StyleSheet.create({
+    card: {
+        width: screenWidth * 0.9,
+        height: 300,
+        borderRadius: 10, 
+        backgroundColor: "red",
+        padding: 10,
+        margin: 10
+    },
+  });
