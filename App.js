@@ -1,14 +1,16 @@
-import BatteryStatus from "./BatteryStatus";
 import {
   StyleSheet,
   ImageBackground,
   ScrollView,
   SafeAreaView,
+  View
 } from "react-native";
 import CardOne from "./CardOne";
 import Header from "./Header";
 import CardTwo from "./CardTwo";
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
+import CardThree from "./CardThree";
+import CardFour from "./CardFour";
 
 export default function App() {
   const [carbonIntensityData, setCarbonIntensityData] = useState([]);
@@ -47,6 +49,12 @@ export default function App() {
           <Header></Header>
           <CardOne carbonIntensityData={carbonIntensityData}></CardOne>
           <CardTwo carbonIntensityData={carbonIntensityData}></CardTwo>
+          <View style={{
+          flexDirection: "row",
+          alignItems: "flex-start",
+          alignSelf: "flex-start",
+          paddingBottom: 20,
+        }}><CardThree/><CardFour/></View>
         </ImageBackground>
       </ScrollView>
     </SafeAreaView>
