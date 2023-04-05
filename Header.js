@@ -6,9 +6,9 @@ const screenWidth = Dimensions.get('window').width;
 
 const Header = ({ title, subtitle }) => {
     return (
-      <View>
+      <View style={{backgroundColor: "#BD0000", paddingTop: 16}}>
         <Image source={require('./header.png')}         style={styles.image}
-        resizeMode="cover"/>
+        />
       </View>
     );
   };
@@ -17,7 +17,7 @@ const Header = ({ title, subtitle }) => {
     image: {
       width: screenWidth,
       height: 290,
-      resizeMode: 'cover'
+      resizeMode: 'stretch',
     },
   });
 

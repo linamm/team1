@@ -9,7 +9,14 @@ const screenWidth = Dimensions.get("window").width;
 const CardTwo = ({ data }) => {
   return (
     <View style={styles.card}>
-      <View style={{ flexDirection: "row" }}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "flex-start",
+          alignSelf: "flex-start",
+          paddingBottom: 20,
+        }}
+      >
         <Feather name="battery-charging" size={24} color="black" />
         <Text style={styles.title}> Your next green charge window</Text>
       </View>
@@ -47,6 +54,7 @@ const CardTwo = ({ data }) => {
           paddingBottom: 10,
         }}
       >
+        {" "}
         <BatteryLevel carbonIntensityData={data} />
       </Text>
 
@@ -63,15 +71,15 @@ export default CardTwo;
 
 const styles = StyleSheet.create({
   card: {
-    title: {
-      fontSize: 18,
-      fontWeight: "bold",
-    },
+    flex: 1,
     width: screenWidth * 0.9,
     borderRadius: 10,
     backgroundColor: "#ffffffaa",
     padding: 10,
     margin: screenWidth * 0.05,
     alignItems: "center",
+  },
+  title: {
+    fontSize: 18,
   },
 });
