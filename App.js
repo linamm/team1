@@ -1,9 +1,17 @@
+<<<<<<< Updated upstream
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import CardOne from "./CardOne";
 import Header from "./Header";
 import CardTwo from "./CardTwo";
 import BatteryStatus from "./BatteryStatus";
+=======
+
+import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import CardOne from './CardOne';
+import Header from './Header';
+import CardTwo from './CardTwo';
+>>>>>>> Stashed changes
 import { useState } from "react";
 
 
@@ -30,12 +38,16 @@ export default function App() {
   })
 
   return (
-    <View style={styles.container}>
+  <ImageBackground source={require('./vodafone.jpeg')} style={styles.backgroundImage}>
       <Header></Header>
       <CardOne carbonIntensityData={carbonIntensityData}></CardOne>
       <CardTwo></CardTwo>
+<<<<<<< Updated upstream
       <BatteryStatus />
     </View>
+=======
+    </ImageBackground>
+>>>>>>> Stashed changes
   );
 }
 
@@ -45,5 +57,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "flex-start",
     justifyContent: "flex-start",
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover', // or 'stretch'
   },
 });

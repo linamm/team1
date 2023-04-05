@@ -20,8 +20,8 @@ const CardTwo= ({ data }) => {
         width: screenWidth * 0.9,
         height: 300,
         borderRadius: 10, 
-        backgroundColor: "red",
+        backgroundColor: "#ffffffaa",
         padding: 10,
-        margin: 10
+        margin: screenWidth * 0.05
     },
   });
