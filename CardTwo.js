@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, ScrollView, Alert, ToastAndroid } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, ScrollView, ToastAndroid } from 'react-native';
 import { StackedBarChart } from "react-native-chart-kit";
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import CardView from './CardView';
@@ -36,8 +36,7 @@ const CardTwo = ({ carbonIntensityData }) => {
 
     if (data.intensity.forecast <= 199) return [ 39, 80, data.intensity.forecast - 119 ] // Medium
 
-    if (data.intensity.forecast <= 290) return [ 39, 80, 80, data.intensity.forecast - 199 ] // High
-    
+    return [ 39, 80, 80, data.intensity.forecast - 199 ] // High
   });
 
   const carbonIntensityHighAndLow = carbonIntensityData.filter(data => (new Date(data.to)).getDay() === (new Date()).getDay()).reduce((range, data) => {

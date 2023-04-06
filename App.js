@@ -49,7 +49,8 @@ export default function App() {
       .then((res) => res.json())
       .then((res) => {
         setCarbonIntensityData(res.data.data);
-      });
+      })
+      .catch(err => console.log(err));
   }, []);
 
   return (
