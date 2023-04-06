@@ -55,9 +55,8 @@ const CardTwo = ({ carbonIntensityData }) => {
         }}
       >
         {" "}
-        <BatteryLevel carbonIntensityData={carbonIntensityData} />
       </Text>
-
+      <BatteryLevel carbonIntensityData={carbonIntensityData} />
       <View style={{ flexDirection: "row", textAlign: "center" }}>
         <Entypo name="location-pin" size={24} color="black" />
 
