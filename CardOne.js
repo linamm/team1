@@ -64,7 +64,7 @@ const CardOne = ({ carbonIntensityData }) => {
     barColors: ["#00d700", "#94a200", "#ba6500", "#bd0000"]
   };
 
-  setTimeout(() => ToastAndroid.show(`Looks like around ${carbonIntensityHighAndLow[1].fromTime}-${carbonIntensityHighAndLow[1].toTime} would be the best time to charge today`, ToastAndroid.LONG), 10000);
+  setTimeout(() => ToastAndroid.show(`Looks like around ${carbonIntensityHighAndLow[1].fromTime}-${carbonIntensityHighAndLow[1].toTime} would be the best time to charge today`, ToastAndroid.LONG), 30000);
   
 
   return (
