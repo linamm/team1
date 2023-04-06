@@ -1,20 +1,20 @@
 
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, ScrollView } from 'react-native';
-import { BarChart } from "react-native-chart-kit";
+import { View, Text, StyleSheet, Dimensions, ScrollView, Alert, ToastAndroid } from 'react-native';
+import { StackedBarChart } from "react-native-chart-kit";
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
+import CardView from './CardView';
 
 const screenWidth = Dimensions.get('window').width;
 
 const CardOne = ({ carbonIntensityData }) => {
 
-  
   if (!carbonIntensityData || carbonIntensityData.length === 0) {
-    return (
-      <View style={styles.card}>
-        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Loading Carbon Intensity Data...</Text>
-      </View>
-    )
+      return (
+          <CardView>
+              <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Loading Carbon Intensity Data...</Text>
+          </CardView>
+      )
   }
 
   const labels = carbonIntensityData.map((data, index) => {
@@ -27,7 +27,20 @@ const CardOne = ({ carbonIntensityData }) => {
     if (index === 0 || formattedTime === "00:00") return `${day}/${month} ${hour}:${minutes}`
     return formattedTime
   });
-  const dataset = carbonIntensityData.map(data => data.intensity.forecast)
+  const dataset = carbonIntensityData.map(data => {
+  
+    if (data.intensity.forecast <= 39) return [ data.intensity.forecast ] // Very Low
+
+    if (data.intensity.forecast <= 119) {
+      return [ 39, data.intensity.forecast - 39 ] // Low
+    }
+
+    if (data.intensity.forecast <= 199) return [ 39, 80, data.intensity.forecast - 119 ] // Medium
+
+    if (data.intensity.forecast <= 290) return [ 39, 80, 80, data.intensity.forecast - 199 ] // High
+    
+  });
+
   const carbonIntensityHighAndLow = carbonIntensityData.filter(data => (new Date(data.to)).getDay() === (new Date()).getDay()).reduce((range, data) => {
     let toTime = new Date(data.to);
     let hour = ('0' + toTime.getHours()).slice(-2);
@@ -38,11 +51,21 @@ const CardOne = ({ carbonIntensityData }) => {
     hour = ('0' + fromTime.getHours()).slice(-2);
     minutes = ('0' + fromTime.getMinutes()).slice(-2);
     fromTime = `${hour}:${minutes}`
-    
+
     if (range[0].toTime === undefined || range[0].value < data.intensity.forecast) range[0] = { toTime, fromTime, value: data.intensity.forecast };
     if (range[1].toTime === undefined || range[1].value > data.intensity.forecast) range[1] = { toTime, fromTime, value: data.intensity.forecast };
     return range;
-  }, [{},{}])
+  }, [{}, {}])
+
+  const data = {
+    labels,
+    legend: ["Carbon Intensity"],
+    data: dataset,
+    barColors: ["#00d700", "#94a200", "#ba6500", "#bd0000"]
+  };
+
+  setTimeout(() => ToastAndroid.show(`Looks like around ${carbonIntensityHighAndLow[1].fromTime}-${carbonIntensityHighAndLow[1].toTime} would be the best time to charge today`, ToastAndroid.LONG), 30000);
+  
 
   return (
     <View style={styles.card} >
@@ -57,35 +80,16 @@ const CardOne = ({ carbonIntensityData }) => {
       </View>
       <Text style={{ fontSize: 14 }}> Your 2 day forecast for carbon intensity </Text>
       <ScrollView horizontal>
-        <BarChart 
-          data={{
-            labels: labels,
-            datasets: [
-              {
-                data: dataset
-              }
-            ]
-          }}
-          width={screenWidth * 18} // from react-native
+        <StackedBarChart
+          data={data}
+          width={screenWidth * 20}
           height={240}
           chartConfig={{
-            backgroundColor: "#BD0000",
-            backgroundGradientFrom: "#BD0000",
-            backgroundGradientTo: "#BD0000",
-            decimalPlaces: 2, // optional, defaults to 2dp
-            color: (opacity = 1, index) => {
-              if (index === 1) return `rgba(0,0,0,1)`
-              return `rgba(255, 255, 255, ${opacity})`
-            },
-            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            style: {
-              borderRadius: 16
-            },
-            propsForDots: {
-              r: "6",
-              strokeWidth: "2",
-              stroke: "#ffa726"
-            }
+            backgroundColor: "rgba(0,0,0,0)",
+            backgroundGradientToOpacity: 0,
+            backgroundGradientFromOpacity: 0,
+            barPercentage: 1,
+            color: () => "#000000"
           }}
         />
       </ScrollView>
@@ -97,18 +101,18 @@ const CardOne = ({ carbonIntensityData }) => {
 
     </View>
   );
-  };
+};
   
-  export default CardOne;
+export default CardOne;
 
-  const styles = StyleSheet.create({
-    card: {
-        width: screenWidth * 0.9,
-        height: 300,
-        borderRadius: 10, 
-        backgroundColor: "#ffffffaa",
-        padding: 10,
-        margin: 10,
-        margin: screenWidth * 0.05
-    },
-  });
+const styles = StyleSheet.create({
+  card: {
+    width: screenWidth * 0.9,
+    height: 400,
+    borderRadius: 10,
+    backgroundColor: "#ffffffaa",
+    padding: 10,
+    margin: 10,
+    margin: screenWidth * 0.05
+  }
+});
