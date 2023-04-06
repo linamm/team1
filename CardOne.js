@@ -82,7 +82,7 @@ const CardOne = ({ carbonIntensityData }) => {
       <ScrollView horizontal>
         <StackedBarChart
           data={data}
-          width={screenWidth * 18}
+          width={screenWidth * 20}
           height={240}
           chartConfig={{
             backgroundColor: "rgba(0,0,0,0)",
