@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions, ScrollView } from 'react-native';
-import { BarChart } from "react-native-chart-kit";
+import { StackedBarChart } from "react-native-chart-kit";
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 
 const screenWidth = Dimensions.get('window').width;
@@ -27,7 +27,19 @@ const CardOne = ({ carbonIntensityData }) => {
     if (index === 0 || formattedTime === "00:00") return `${day}/${month} ${hour}:${minutes}`
     return formattedTime
   });
-  const dataset = carbonIntensityData.map(data => data.intensity.forecast)
+  const dataset = carbonIntensityData.map(data => {
+  
+    if (data.intensity.forecast <= 39) return [ data.intensity.forecast ] // Very Low
+
+    if (data.intensity.forecast <= 119) {
+      return [ 39, data.intensity.forecast - 39 ] // Low
+    }
+
+    if (data.intensity.forecast <= 199) return [ 39, 80, data.intensity.forecast - 119 ] // Medium
+
+    if (data.intensity.forecast <= 290) return [ 39, 80, 80, data.intensity.forecast - 199 ] // High
+    
+  })
   const carbonIntensityHighAndLow = carbonIntensityData.filter(data => (new Date(data.to)).getDay() === (new Date()).getDay()).reduce((range, data) => {
     let toTime = new Date(data.to);
     let hour = ('0' + toTime.getHours()).slice(-2);
@@ -44,6 +56,13 @@ const CardOne = ({ carbonIntensityData }) => {
     return range;
   }, [{},{}])
 
+  const data = {
+    labels,
+    legend: ["Carbon Intensity"],
+    data: dataset,
+    barColors: ["#00d700", "#94a200", "#ba6500", "#bd0000"]
+  };
+
   return (
     <View style={styles.card} >
       <View style={{
@@ -57,35 +76,16 @@ const CardOne = ({ carbonIntensityData }) => {
       </View>
       <Text style={{ fontSize: 14 }}> Your 2 day forecast for carbon intensity </Text>
       <ScrollView horizontal>
-        <BarChart 
-          data={{
-            labels: labels,
-            datasets: [
-              {
-                data: dataset
-              }
-            ]
-          }}
-          width={screenWidth * 18} // from react-native
+        <StackedBarChart
+          data={data}
+          width={screenWidth * 18}
           height={240}
           chartConfig={{
-            backgroundColor: "#BD0000",
-            backgroundGradientFrom: "#BD0000",
-            backgroundGradientTo: "#BD0000",
-            decimalPlaces: 2, // optional, defaults to 2dp
-            color: (opacity = 1, index) => {
-              if (index === 1) return `rgba(0,0,0,1)`
-              return `rgba(255, 255, 255, ${opacity})`
-            },
-            labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            style: {
-              borderRadius: 16
-            },
-            propsForDots: {
-              r: "6",
-              strokeWidth: "2",
-              stroke: "#ffa726"
-            }
+            backgroundColor: "rgba(0,0,0,0)",
+            backgroundGradientToOpacity: 0,
+            backgroundGradientFromOpacity: 0,
+            barPercentage: 1,
+            color: () => "#000000"
           }}
         />
       </ScrollView>
