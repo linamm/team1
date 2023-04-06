@@ -1,15 +1,34 @@
 import React from "react";
-import { View, Text, StyleSheet, Dimensions } from "react-native";
-import { Feather } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import BatteryLevel from "./BatteryStatus";
+import { View, Text, StyleSheet, Dimensions, Share, Button} from "react-native";
 import { Ionicons } from '@expo/vector-icons'; 
+import CardView from "./CardView";
 
 const screenWidth = Dimensions.get("window").width;
 
 const CardFour = ({ data }) => {
+    
+    const onShare = async () => {
+        try {
+          const result = await Share.share({
+            message:
+              "Simply Share Anything across all social media platforms, isn't it awesome",
+          });
+          if (result.action === Share.sharedAction) {
+            if (result.activityType) {
+              // shared with activity type of result.activityType
+            } else {
+              // shared
+            }
+          } else if (result.action === Share.dismissedAction) {
+            // dismissed
+          }
+        } catch (error) {
+          alert(error.message);
+        }
+      };
+
   return (
-    <View style={styles.card}>
+    <CardView style={{marginLeft: screenWidth * 0.025}}>
       <View
         style={{
           flexDirection: "row",
@@ -34,7 +53,8 @@ const CardFour = ({ data }) => {
         {" How can we minimise our carbon footprint powered by data from the Grid "}
        
       </Text>
-    </View>
+      <Button onPress={onShare} title="Share" />
+    </CardView>
   );
 };
 

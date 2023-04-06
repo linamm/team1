@@ -3,12 +3,13 @@ import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import BatteryLevel from "./BatteryStatus";
+import CardView from './CardView';
 
 const screenWidth = Dimensions.get("window").width;
 
 const CardTwo = ({ carbonIntensityData }) => {
   return (
-    <View style={styles.card}>
+    <CardView style={styles.card}>
       <View
         style={{
           flexDirection: "row",
@@ -63,22 +64,13 @@ const CardTwo = ({ carbonIntensityData }) => {
 
         <Text style={{ fontSize: 12 }}> Borough London</Text>
       </View>
-    </View>
+    </CardView>
   );
 };
 
 export default CardTwo;
 
 const styles = StyleSheet.create({
-  card: {
-    flex: 1,
-    width: screenWidth * 0.9,
-    borderRadius: 10,
-    backgroundColor: "#ffffffaa",
-    padding: 10,
-    margin: screenWidth * 0.05,
-    alignItems: "center",
-  },
   title: {
     fontSize: 18,
     fontWeight: "bold",

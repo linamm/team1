@@ -1,19 +1,21 @@
 
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { BarChart } from "react-native-chart-kit";
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
+import CardView from './CardView';
 
 const screenWidth = Dimensions.get('window').width;
+
 
 const CardOne = ({ carbonIntensityData }) => {
 
   
   if (!carbonIntensityData || carbonIntensityData.length === 0) {
     return (
-      <View style={styles.card}>
+      <CardView>
         <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Loading Carbon Intensity Data...</Text>
-      </View>
+      </CardView>
     )
   }
 
@@ -45,7 +47,7 @@ const CardOne = ({ carbonIntensityData }) => {
   }, [{},{}])
 
   return (
-    <View style={styles.card} >
+    <CardView>
       <View style={{
             flexDirection: "row",
             alignItems: "flex-start",
@@ -95,20 +97,8 @@ const CardOne = ({ carbonIntensityData }) => {
       <Text style={{ fontSize: 14, fontWeight: 'bold', color: 'red' }}><AntDesign name="arrowup" size={14} color="red" />{carbonIntensityHighAndLow[0].value} {carbonIntensityHighAndLow[0].fromTime}-{carbonIntensityHighAndLow[0].toTime}</Text>
       <Text style={{ fontSize: 12 }}>Use this as a guide to decide when to use power in your region to minimise your environmental impact</Text>
 
-    </View>
+    </CardView>
   );
   };
   
   export default CardOne;
-
-  const styles = StyleSheet.create({
-    card: {
-        width: screenWidth * 0.9,
-        height: 400,
-        borderRadius: 10, 
-        backgroundColor: "#ffffffaa",
-        padding: 10,
-        margin: 10,
-        margin: screenWidth * 0.05
-    },
-  });

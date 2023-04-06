@@ -3,13 +3,14 @@ import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import BatteryLevel from "./BatteryStatus";
-import { Ionicons } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons';
+import CardView from "./CardView";
 
 const screenWidth = Dimensions.get("window").width;
 
 const CardThree = ({ data }) => {
   return (
-    <View style={styles.card}>
+    <CardView style={{marginRight: screenWidth * 0.025}}>
       <View
         style={{
           flexDirection: "row",
@@ -34,21 +35,8 @@ const CardThree = ({ data }) => {
         {" How can we minimise our carbon footprint powered by data from the Grid "}
        
       </Text>
-    </View>
+    </CardView>
   );
 };
 
 export default CardThree;
-
-const styles = StyleSheet.create({
-  card: {
-    flex: 1,
-    width: screenWidth * 0.45,
-
-    borderRadius: 10,
-    backgroundColor: "#ffffffaa",
-    padding: 10,
-    margin: screenWidth * 0.05,
-    alignItems: "center",
-  }
-});
