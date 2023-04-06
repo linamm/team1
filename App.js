@@ -3,7 +3,7 @@ import {
   ImageBackground,
   ScrollView,
   SafeAreaView,
-  View
+  View,
 } from "react-native";
 import CardOne from "./CardOne";
 import Header from "./Header";
@@ -12,15 +12,15 @@ import { useState, useEffect, useRef } from "react";
 import CardThree from "./CardThree";
 import CardFour from "./CardFour";
 
-import * as Device from "expo-device";
+import "./ignorWarns";
 import * as Notifications from "expo-notifications";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
     shouldPlaySound: false,
-    shouldSetBadge: false
-  })
+    shouldSetBadge: false,
+  }),
 });
 
 export default function App() {
@@ -42,8 +42,8 @@ export default function App() {
       `https://api.carbonintensity.org.uk/regional/intensity/${startDate}/${endDate}/postcode/${postcode}`,
       {
         headers: {
-          Accept: "application/json"
-        }
+          Accept: "application/json",
+        },
       }
     )
       .then((res) => res.json())
@@ -67,7 +67,7 @@ export default function App() {
               flexDirection: "row",
               alignItems: "flex-start",
               alignSelf: "flex-start",
-              paddingBottom: 20
+              paddingBottom: 20,
             }}
           >
             <CardThree />
@@ -84,10 +84,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "flex-start",
-    justifyContent: "flex-start"
+    justifyContent: "flex-start",
   },
   backgroundImage: {
     flex: 1,
-    resizeMode: "cover" // or 'stretch'
-  }
+    resizeMode: "cover", // or 'stretch'
+  },
 });
