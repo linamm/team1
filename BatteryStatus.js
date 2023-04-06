@@ -73,16 +73,16 @@ const BatteryLevel = ({ carbonIntensityData }) => {
         new Date(lID.to).getTime() < currentTime
       ) {
         return {
-          msg: `You are currenlty in an optimum
-           green charging window for your region`,
-          color: "green",
+          msg: `You are not yet currently in an optimum 
+      green charging window for your region`,
+          color: "red",
         };
       }
     });
     return {
-      msg: `You are not yet currenlty in an optimum 
-      green charging window for your region`,
-      color: "red",
+      msg: `You are currently in an optimum
+           green charging window for your region`,
+      color: "green",
     };
   };
   const style = styles(intensityMessage.color).viewStyle;
@@ -94,7 +94,7 @@ const BatteryLevel = ({ carbonIntensityData }) => {
           textAlign: "center",
           color: "green",
           paddingBottom: 10,
-          marginRight: 50,
+          marginRight: 20,
         }}
       >
         Battery State: {BATTERY_STATE[batteryState]}
