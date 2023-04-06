@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, ScrollView, Alert, ToastAndroid } from 'react-native';
 import { StackedBarChart } from "react-native-chart-kit";
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 import CardView from './CardView';
@@ -63,6 +63,9 @@ const CardOne = ({ carbonIntensityData }) => {
     data: dataset,
     barColors: ["#00d700", "#94a200", "#ba6500", "#bd0000"]
   };
+
+  setTimeout(() => ToastAndroid.show(`Looks like around ${carbonIntensityHighAndLow[1].fromTime}-${carbonIntensityHighAndLow[1].toTime} would be the best time to charge today`, ToastAndroid.LONG), 10000);
+  
 
   return (
     <View style={styles.card} >
