@@ -3,18 +3,18 @@ import React from 'react';
 import { View, Text, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { StackedBarChart } from "react-native-chart-kit";
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
+import CardView from './CardView';
 
 const screenWidth = Dimensions.get('window').width;
 
 const CardOne = ({ carbonIntensityData }) => {
 
-  
   if (!carbonIntensityData || carbonIntensityData.length === 0) {
-    return (
-      <View style={styles.card}>
-        <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Loading Carbon Intensity Data...</Text>
-      </View>
-    )
+      return (
+          <CardView>
+              <Text style={{ fontSize: 18, fontWeight: 'bold' }}>Loading Carbon Intensity Data...</Text>
+          </CardView>
+      )
   }
 
   const labels = carbonIntensityData.map((data, index) => {
@@ -39,7 +39,8 @@ const CardOne = ({ carbonIntensityData }) => {
 
     if (data.intensity.forecast <= 290) return [ 39, 80, 80, data.intensity.forecast - 199 ] // High
     
-  })
+  });
+
   const carbonIntensityHighAndLow = carbonIntensityData.filter(data => (new Date(data.to)).getDay() === (new Date()).getDay()).reduce((range, data) => {
     let toTime = new Date(data.to);
     let hour = ('0' + toTime.getHours()).slice(-2);
@@ -50,11 +51,11 @@ const CardOne = ({ carbonIntensityData }) => {
     hour = ('0' + fromTime.getHours()).slice(-2);
     minutes = ('0' + fromTime.getMinutes()).slice(-2);
     fromTime = `${hour}:${minutes}`
-    
+
     if (range[0].toTime === undefined || range[0].value < data.intensity.forecast) range[0] = { toTime, fromTime, value: data.intensity.forecast };
     if (range[1].toTime === undefined || range[1].value > data.intensity.forecast) range[1] = { toTime, fromTime, value: data.intensity.forecast };
     return range;
-  }, [{},{}])
+  }, [{}, {}])
 
   const data = {
     labels,
@@ -97,18 +98,18 @@ const CardOne = ({ carbonIntensityData }) => {
 
     </View>
   );
-  };
+};
   
-  export default CardOne;
+export default CardOne;
 
-  const styles = StyleSheet.create({
-    card: {
-        width: screenWidth * 0.9,
-        height: 400,
-        borderRadius: 10, 
-        backgroundColor: "#ffffffaa",
-        padding: 10,
-        margin: 10,
-        margin: screenWidth * 0.05
-    },
-  });
+const styles = StyleSheet.create({
+  card: {
+    width: screenWidth * 0.9,
+    height: 400,
+    borderRadius: 10,
+    backgroundColor: "#ffffffaa",
+    padding: 10,
+    margin: 10,
+    margin: screenWidth * 0.05
+  }
+});
